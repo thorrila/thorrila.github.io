@@ -1,0 +1,55 @@
+/* General Page Styling */
+body { 
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.6; 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    padding: 40px; 
+    color: #333; 
+}
+
+h1 { 
+    font-size: 3.5rem; 
+    text-align: center; 
+    border-bottom: 3px double black; 
+    padding-bottom: 20px; 
+}
+
+/* The Magazine Layout */
+.magazine-grid { 
+    display: grid; 
+    grid-template-columns: 3fr 2fr; /* Makes the left column wider for the chart */
+    gap: 40px; 
+}
+
+/* Force the intro text to span the ENTIRE width of the top row */
+.intro-block { 
+    grid-column: 1 / -1; 
+    margin-bottom: 20px;
+}
+
+.lead-paragraph { 
+    font-size: 1.3rem; 
+    font-weight: bold; 
+    font-style: italic; 
+    color: #444; 
+}
+
+/* Image styling to prevent it from blowing up too large */
+.chart-section img { 
+    width: 100%; 
+    height: auto; 
+    border: 1px solid #ddd; 
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1); 
+}
+
+.caption { 
+    font-size: 0.85rem; 
+    color: #666; 
+    font-style: italic; 
+}
+
+/* Responsive fix: Stack vertically on small screens */
+@media (max-width: 800px) { 
+    .magazine-grid { grid-template-columns: 1fr; } 
+}
