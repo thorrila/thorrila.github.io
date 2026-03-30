@@ -1,6 +1,7 @@
 /* General Page Styling */
 body {
   font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
   line-height: 1.6;
   max-width: 1000px;
   margin: 0 auto;
