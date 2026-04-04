@@ -1,0 +1,15 @@
+#### To do 
+- Maybe change the title - I think that is fine 
+-
+- change the introduction (better describe the dataset, do not list the districts) - Thorii
+-
+- add 3rd interactive visualization -  
+- try building a tool where the reader 
+- can select any crime from the whole 
+- dataset based on its Location Quotient ratio. 
+- When they click a specific crime, the 
+- chart should flip to show the absolute counts, 
+- letting the reader 
+- investigate for themselves 
+- which 'hotspots' are real and 
+- which are just statistical illusions
