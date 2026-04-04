@@ -1,67 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crime Analysis - Interactive Explorer</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; padding: 40px 20px; }
-        .container { max-width: 1200px; margin: 0 auto; background: white; border-radius: 12px; padding: 40px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 8px; margin-bottom: 30px; color: white; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3); }
-        .header h2 { font-size: 28px; font-weight: 600; margin-bottom: 12px; }
-        .header p { font-size: 15px; opacity: 0.95; line-height: 1.6; }
-        .controls { background-color: #f8f9fa; padding: 20px; border-radius: 6px; margin-bottom: 30px; border-left: 4px solid #667eea; }
-        .controls-row { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
-        label { font-weight: 500; color: #333; font-size: 14px; }
-        select, button { padding: 10px 12px; border-radius: 4px; font-size: 14px; }
-        select { min-width: 400px; cursor: pointer; border: 1px solid #ddd; background: white; }
-        button { border: 2px solid #667eea; background: white; color: #667eea; cursor: pointer; font-weight: 500; transition: all 0.3s ease; }
-        button.active { background: #667eea; color: white; }
-        button:hover { background: #667eea; color: white; }
-        .button-group { display: flex; gap: 8px; }
-        #chart { margin: 30px 0; border-radius: 6px; overflow: hidden; }
-        .explanation { margin-top: 40px; padding: 25px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea; }
-        .explanation h3 { color: #667eea; margin-bottom: 15px; font-size: 16px; }
-        .explanation ul { margin-left: 20px; color: #555; line-height: 1.8; }
-        .explanation li { margin-bottom: 8px; }
-        @media (max-width: 768px) { select { min-width: 100%; } .controls-row { flex-direction: column; } }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h2>🔍 Interactive Crime Explorer</h2>
-            <p>Explore the crucial difference between <strong>Location Quotient ratios</strong> and <strong>Absolute Counts</strong>. 
-            Select any crime and toggle views to investigate which hotspots are genuine versus statistical mirages.</p>
-        </div>
-        <div class="controls">
-            <div class="controls-row">
-                <div style="flex: 1; min-width: 300px;">
-                    <label for="crimeSelect">📋 Select Crime Type:</label>
-                    <select id="crimeSelect"></select>
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 8px;">📊 View Mode:</label>
-                    <div class="button-group">
-                        <button id="lqBtn" class="active">📊 Location Quotient</button>
-                        <button id="countBtn">📈 Absolute Counts</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="chart"></div>
-        <div class="explanation">
-            <h3>📚 How to Read This Tool</h3>
-            <ul>
-                <li><strong>Location Quotient View:</strong> Statistical ratios where > 1 = overrepresented. Watch for high LQ with low counts = mirage.</li>
-                <li><strong>Absolute Counts View:</strong> Real incident numbers. Validates whether high LQ ratios are backed by data.</li>
-                <li><strong>Investigation:</strong> Pick a crime, check LQ, then switch to counts. Are "hottest" districts just noise?</li>
-            </ul>
-        </div>
-    </div>
-    <script>
+﻿
         const allCrimes = ["human trafficking (a), commercial sex acts", "human trafficking (b), involuntary servitude", "kidnapping", "missing person", "prostitution", "sex offenses, forcible", "sex offenses, non forcible"];
         const crimeProfiles = {"human trafficking (a), commercial sex acts": {"BAYVIEW": 0.6491195516160189, "CENTRAL": 1.1512165348323233, "INGLESIDE": 0.09498430249162004, "MISSION": 0.7827588668939542, "NORTHERN": 0.5568209494954257, "OUT OF SF": 8.452178869243065, "PARK": 0.09428376268162565, "RICHMOND": 0.1947224131591988, "SOUTHERN": 2.4561903877532067, "TARAVAL": 2.0849825627420353, "TENDERLOIN": 0.6445553427982763}, "human trafficking (b), involuntary servitude": {"BAYVIEW": 0.0, "CENTRAL": 0.0, "INGLESIDE": 0.0, "MISSION": 0.0, "NORTHERN": 0.0, "OUT OF SF": 48.70064967516242, "PARK": 0.0, "RICHMOND": 0.0, "SOUTHERN": 0.0, "TARAVAL": 7.644936063387464, "TENDERLOIN": 0.0}, "kidnapping": {"BAYVIEW": 1.456934908738216, "CENTRAL": 1.0138788935719674, "INGLESIDE": 1.5701690452754142, "MISSION": 0.7237848576037317, "NORTHERN": 0.8280305928376482, "OUT OF SF": 0.0, "PARK": 0.39963808796625533, "RICHMOND": 0.9574230935669714, "SOUTHERN": 1.183565082247311, "TARAVAL": 0.9319609119776402, "TENDERLOIN": 1.3265667468918128}, "missing person": {"BAYVIEW": 1.2301869082287162, "CENTRAL": 0.8932786915109893, "INGLESIDE": 1.1996200406022892, "MISSION": 0.661431183873316, "NORTHERN": 0.7804872524562879, "OUT OF SF": 1.4428686838974973, "PARK": 1.354215165645221, "RICHMOND": 1.2305222735697634, "SOUTHERN": 1.0923582597943473, "TARAVAL": 1.2063896768641817, "TENDERLOIN": 0.8446348362560318}, "prostitution": {"BAYVIEW": 0.09347744853351203, "CENTRAL": 1.3048762977079456, "INGLESIDE": 0.05967886760258078, "MISSION": 2.396294247958023, "NORTHERN": 1.9040019745364194, "OUT OF SF": 0.0, "PARK": 0.014972422912579981, "RICHMOND": 0.088733420341761, "SOUTHERN": 0.332923615197734, "TARAVAL": 0.31081409102217217, "TENDERLOIN": 1.5316388086380535}, "sex offenses, forcible": {"BAYVIEW": 0.8402222813262927, "CENTRAL": 1.1957126047402418, "INGLESIDE": 1.0932044930189062, "MISSION": 0.924603646890597, "NORTHERN": 0.9541693848597517, "OUT OF SF": 0.0, "PARK": 0.576481558904619, "RICHMOND": 1.0909308170648837, "SOUTHERN": 1.5236115808382642, "TARAVAL": 0.8233142530823129, "TENDERLOIN": 0.9689085801616101}, "sex offenses, non forcible": {"BAYVIEW": 1.3047087333145895, "CENTRAL": 0.8098674460157623, "INGLESIDE": 1.3364070466844216, "MISSION": 0.8565849615751671, "NORTHERN": 0.9792926582695713, "OUT OF SF": 0.0, "PARK": 1.3265506144740353, "RICHMOND": 2.7396990688677976, "SOUTHERN": 0.7275374220762253, "TARAVAL": 0.800051448494037, "TENDERLOIN": 0.30229145921934664}};
         const crimeCounts = {"human trafficking (a), commercial sex acts": {"BAYVIEW": 7, "CENTRAL": 12, "INGLESIDE": 1, "MISSION": 18, "NORTHERN": 8, "OUT OF SF": 7, "PARK": 1, "RICHMOND": 1, "SOUTHERN": 38, "TARAVAL": 22, "TENDERLOIN": 6}, "human trafficking (b), involuntary servitude": {"BAYVIEW": 0, "CENTRAL": 0, "INGLESIDE": 0, "MISSION": 0, "NORTHERN": 0, "OUT OF SF": 1, "PARK": 0, "RICHMOND": 0, "SOUTHERN": 0, "TARAVAL": 2, "TENDERLOIN": 0}, "kidnapping": {"BAYVIEW": 556, "CENTRAL": 374, "INGLESIDE": 585, "MISSION": 589, "NORTHERN": 421, "OUT OF SF": 0, "PARK": 150, "RICHMOND": 174, "SOUTHERN": 648, "TARAVAL": 348, "TENDERLOIN": 437}, "missing person": {"BAYVIEW": 7316, "CENTRAL": 5135, "INGLESIDE": 6965, "MISSION": 8388, "NORTHERN": 6184, "OUT OF SF": 659, "PARK": 7921, "RICHMOND": 3485, "SOUTHERN": 9320, "TARAVAL": 7020, "TENDERLOIN": 4336}, "prostitution": {"BAYVIEW": 146, "CENTRAL": 1970, "INGLESIDE": 91, "MISSION": 7981, "NORTHERN": 3962, "OUT OF SF": 0, "PARK": 23, "RICHMOND": 66, "SOUTHERN": 746, "TARAVAL": 475, "TENDERLOIN": 2065}, "sex offenses, forcible": {"BAYVIEW": 655, "CENTRAL": 901, "INGLESIDE": 832, "MISSION": 1537, "NORTHERN": 991, "OUT OF SF": 0, "PARK": 442, "RICHMOND": 405, "SOUTHERN": 1704, "TARAVAL": 628, "TENDERLOIN": 652}, "sex offenses, non forcible": {"BAYVIEW": 5, "CENTRAL": 3, "INGLESIDE": 5, "MISSION": 7, "NORTHERN": 5, "OUT OF SF": 0, "PARK": 5, "RICHMOND": 5, "SOUTHERN": 4, "TARAVAL": 3, "TENDERLOIN": 1}};
@@ -131,6 +68,4 @@
         });
         
         createVisualization();
-    </script>
-</body>
-</html>
+    
