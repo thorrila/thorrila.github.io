@@ -2,125 +2,187 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Assignment 2: Taraval Crisis</title>
+    <meta
+      name="description"
+      content="A data story exploring a statistical anomaly in San Francisco's crime data for the Taraval district."
+    />
+    <title>Assignment 2: The Taraval Mystery</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>The Taraval Mystery</h1>
-    <p class="lead-paragraph">
-      Taraval is a residential district in southwest San Francisco, known for
-      its quiet and safe small-town feel. So why is labor trafficking reported
-      at over 7 times the city average?
-    </p>
+    <header>
+      <h1>The Taraval Mystery</h1>
+      <p class="lead-paragraph">
+        Taraval is a residential district in southwest San Francisco, known for
+        its quiet and safe small-town feel. So why is labor trafficking reported
+        at over 7 times the city average?
+      </p>
+    </header>
 
-    <section class="story-section">
-      <p>
-        The data comes from the San Fransisco Police Departments public incident
-        report database, covering over 20 years. It includes all reported crimes
-        across SFPD's 10 police districts.  Cases are counted by incident, not by victim, meaning multiple
-        victims in a single incident are recorded as one data point. While
-        kidnapping and sex trafficking remain low, labor trafficking (forcing
-        labor through debt or coercion) is where Taraval stands dramatically
-        apart. Its worth noting that the data reflects reported and arrested
-        cases only, meaning the actual number of trafficking victims in Taraval
-        is almost certainly far higher than these numbers suggest
-      </p>
-      <p>
-        <strong>Figure 1</strong> displays a heatmap of the location quotients
-        for each crime type across the 10 police districts. Location Quotient is
-        a measure of where specific crimes are disproportionately concentrated,
-        compared to the average.
-      </p>
-    </section>
+    <article>
+      <section class="story-section">
+        <p>
+          The data comes from the San Fransisco Police Department's public
+          incident report database, covering over 20 years. It includes all
+          reported crimes across SFPD's 10 police districts. Cases are counted
+          by incident, not by victim, meaning multiple victims in a single
+          incident are recorded as one data point. While kidnapping and sex
+          trafficking remain low, labor trafficking (forcing labor through debt
+          or coercion) is where Taraval stands dramatically apart. It's worth
+          noting that the data reflects reported and arrested cases only,
+          meaning the actual number of trafficking victims in Taraval is almost
+          certainly far higher than these numbers suggest.
+        </p>
+        <p>
+          <strong>Figure 1</strong> displays a heatmap of the location quotients
+          for each crime type across the 10 police districts. Location Quotient
+          is a measure of where specific crimes are disproportionately
+          concentrated, compared to the average.
+        </p>
+      </section>
 
-    <section class="story-figure">
-      <img src="district_heatmap.png" alt="Heatmap of crime profiles" />
-      <p class="caption">
-        <strong>Figure 1:</strong> A score of 7.64 means labor trafficking is
-        nearly eight times more concentrated in Taraval.
-      </p>
-    </section>
+      <figure class="story-figure">
+        <img
+          src="district_heatmap.png"
+          alt="Heatmap showing location quotients for various crimes across SF police districts. Labor trafficking in Taraval has a very high score."
+        />
+        <figcaption class="caption">
+          <strong>Figure 1:</strong> A score of 7.64 means labor trafficking is
+          nearly eight times more concentrated in Taraval.
+        </figcaption>
+      </figure>
 
-    <section class="map-section">
-      <h2>Raw numbers tell a different story</h2>
-      <p>
-        The heatmap in Figure 1 tells a compelling story: a 7.64 location
-        quotient suggests Taraval is a labor trafficking hotspot. But if we
-        don't look at the raw numbers, this kind of heatmaps can be very
-        missleading, especially when the underlying data is sparse.
-      </p>
-      <p>
-        What we are actually seeing is a statistical mirage known as the
-        "Low-Count Ratio Effect". When the total number of events is incredibly
-        low, even the smallest fluctuations create enormous ratios. Taraval
-        shows a massive location quotient not because it's a crime epicenter,
-        but because of how proportions react to exceptionally rare events. When
-        the citywide total is almost zero, every single incident carries massive
-        mathematical weight.
-      </p>
-      <p>
-        Human trafficking crimes are exceedingly rare in this dataset. There are
-        exactly three reported incidents of involuntary servitude across the
-        entire city over the last 20 years. Because that baseline is only three,
-        the fact that two of those incidents happened in Taraval distorts the
-        math, making the district look like an epidemic relative to the rest of
-        the city.
-      </p>
-      <p>
-        This statistical trap has serious real-world consequences. As the "Dirty
-        Data, Bad Predictions" warns, algorithms trained on skewed ratios can
-        cause active harm. A predictive policing system fed only the heatmap
-        above might unjustly flag Taraval for intensive enforcement based on
-        just two incidents over two decades.
-      </p>
-      <p>
-        To separate the statistical mirage from the reality on the ground, we
-        mapped the absolute counts of our focus crimes. The map below plots
-        missing person reports in Taraval as faint gray dots to show the actual
-        volume of everyday incidents. Floating among them,the glowing red
-        markers represent those two isolated human trafficking reports.
-      </p>
-      <iframe
-        src="taraval_reality_map.html"
-        title="Taraval Reality Map"
-        class="embedded-map"
-        loading="lazy"
-      >
-      </iframe>
-      <p class="caption">
-        <strong>Figure 2:</strong> Absolute count of labor trafficking (red
-        dots) versus missing persons (gray dots) in Taraval.
-      </p>
-      <p>
-        While the Location Quotient ratio (Figure 1) flagged Taraval as a labor
-        trafficking hotspot, this Folium scatter map reveals the harsh reality.
-        Over 20 years, only 2 actual labor trafficking incidents (red dots) were
-        reported in Taraval. By contrast, the 7,020 missing person incidents
-        (gray dots) demonstrate that the district's actual crime profile is
-        driven by everyday missing persons cases, not by trafficking epidemics.
-      </p>
-    </section>
+      <section class="map-section">
+        <h2>Raw numbers tell a different story</h2>
+        <p>
+          The heatmap in Figure 1 tells a compelling story: a 7.64 location
+          quotient suggests Taraval is a labor trafficking hotspot. But if we
+          don't look at the raw numbers, this kind of heatmaps can be very
+          missleading, especially when the underlying data is sparse.
+        </p>
+        <p>
+          What we are actually seeing is a statistical mirage known as the
+          "Low-Count Ratio Effect". When the total number of events is
+          incredibly low, even the smallest fluctuations create enormous ratios.
+          Taraval shows a massive location quotient not because it's a crime
+          epicenter, but because of how proportions react to exceptionally rare
+          events. When the citywide total is almost zero, every single incident
+          carries massive mathematical weight.
+        </p>
+        <p>
+          Human trafficking crimes are exceedingly rare in this dataset. There
+          are exactly three reported incidents of involuntary servitude across
+          the entire city over the last 20 years. Because that baseline is only
+          three, the fact that two of those incidents happened in Taraval
+          distorts the math, making the district look like an epidemic relative
+          to the rest of the city.
+        </p>
+        <p>
+          This statistical trap has serious real-world consequences. As the
+          "Dirty Data, Bad Predictions" warns, algorithms trained on skewed
+          ratios can cause active harm. A predictive policing system fed only
+          the heatmap above might unjustly flag Taraval for intensive
+          enforcement based on just two incidents over two decades.
+        </p>
+        <p>
+          To separate the statistical mirage from the reality on the ground, we
+          mapped the absolute counts of our focus crimes. The map below plots
+          missing person reports in Taraval as faint gray dots to show the
+          actual volume of everyday incidents. Floating among them,the glowing
+          red markers represent those two isolated human trafficking reports.
+        </p>
+        <figure>
+          <iframe
+            src="taraval_reality_map.html"
+            title="Taraval Reality Map"
+            class="embedded-map"
+            loading="lazy"
+          >
+          </iframe>
+          <figcaption class="caption">
+            <strong>Figure 2:</strong> Absolute count of labor trafficking (red
+            dots) versus missing persons (gray dots) in Taraval.
+          </figcaption>
+        </figure>
+        <p>
+          While the Location Quotient ratio (Figure 1) flagged Taraval as a
+          labor trafficking hotspot, this Folium scatter map reveals the harsh
+          reality. Over 20 years, only 2 actual labor trafficking incidents (red
+          dots) were reported in Taraval. By contrast, the 7,020 missing person
+          incidents (gray dots) demonstrate that the district's actual crime
+          profile is driven by everyday missing persons cases, not by
+          trafficking epidemics.
+        </p>
+      </section>
       <!-- Crime Explorer Interactive Tool -->
-  <section id="explorer">
-     <p class="caption">
-        <strong>Figure 3:</strong> Explore the crime data yourself with our interactive Crime Explorer tool. Here focus on the difference between ratios and raw counts across all crime types and districts.
-        Do not forget to switch between view modes to see how the same data can tell very different stories depending on how it's visualized.
-      </p>
-      <iframe src="crime_explorer.html" width="100%" height="1200" frameborder="0" 
-              style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin: 40px 0;">
-      </iframe>
-  </section>
-    
-    <section>
-      <h2>Conclusion: The Danger of Statistical Mirages</h2>
-      <p>
-        The Taraval case is a cautionary tale about the dangers of relying on
-        ratios and heatmaps without context. While the location quotient suggested
-        a labor trafficking crisis, the raw numbers revealed a completely
-        different story. This kind of statistical mirage can lead to misguided
-        policies and unjustified fear. As data scientists, we must always look
-        beyond the ratios and ask: "What are the actual numbers behind this?"
-      </p>
-    </section>
+      <section id="explorer">
+        <figure>
+          <figcaption class="caption">
+            <strong>Figure 3:</strong> Explore the crime data yourself with our
+            interactive Crime Explorer tool. Here focus on the difference
+            between ratios and raw counts across all crime types and districts.
+            Do not forget to switch between view modes to see how the same data
+            can tell very different stories depending on how it's visualized.
+          </figcaption>
+          <iframe
+            src="crime_explorer.html"
+            width="100%"
+            height="1200"
+            frameborder="0"
+            style="
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+              margin: 40px 0;
+            "
+          >
+          </iframe>
+        </figure>
+      </section>
+
+      <section>
+        <h2>Conclusion: The Danger of Statistical Mirages</h2>
+        <p>
+          The Taraval case is a cautionary tale about the dangers of relying on
+          ratios and heatmaps without context. While the location quotient
+          suggested a labor trafficking crisis, the raw numbers revealed a
+          completely different story. This kind of statistical mirage can lead
+          to misguided policies and unjustified fear. As data scientists, we
+          must always look beyond the ratios and ask: "What are the actual
+          numbers behind this?"
+        </p>
+      </section>
+
+      <section id="references">
+        <h2>References & Further Reading</h2>
+        <ol>
+          <li>
+            Tversky, A., & Kahneman, D. (1974).
+            <a
+              href="https://www.jstor.org/stable/1738360"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Judgment under Uncertainty: Heuristics and Biases</a
+            >. <em>Science, 185</em>(4157), 1124-1131. (The original paper on
+            biases like the base-rate fallacy).
+          </li>
+          <li>
+            "Overcoming the Small N Problem" - A discussion on the pitfalls of small sample sizes and how they can create misleading conclusions, especially when representing minory data.
+             This article provides practical advice for data scientists on how to avoid these traps and ensure more accurate interpretations of sparse data.
+            <a
+              href="https://www.hks.harvard.edu/publications/overcoming-small-n-problem"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Overcoming the Small N Problem</a
+            >.
+          </li>
+          <li>
+            O'Dwyer, L. M., & Bernauer, J. A. (2013).
+            <em>Quantitative Research for the Qualitative Researcher</em>. SAGE
+            Publications. (Chapter 5 discusses issues of sample size and statistical
+            power).
+          </li>
+        </ol>
+      </section>
+    </article>
   </body>
 </html>
