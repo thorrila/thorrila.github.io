@@ -22,20 +22,29 @@
     <article>
       <section class="story-section">
         <p>
-          The data comes from the San Fransisco Police Department's public
-          incident report database, covering over 20 years. It includes all
-          reported crimes across SFPD's 10 police districts. Cases are counted
-          by incident, not by victim, meaning multiple victims in a single
-          incident are recorded as one data point. While kidnapping and sex
-          trafficking remain low, labor trafficking (forcing labor through debt
-          or coercion) is where Taraval stands dramatically apart. It's worth
-          noting that the data reflects reported and arrested cases only,
-          meaning the actual number of trafficking victims in Taraval is almost
-          certainly far higher than these numbers suggest.
+          The data was gathered from the San Francisco Police Department's 
+          incident reports, found on the city's open data portal (DataSF).
+          These incident reports contain a record for every crime incident reported to the 
+          San Fransisco police, capturing details such as the date, location, and type of crime, 
+          across all 10 police districts. Cases are counted by incident, not by victim, 
+          which means meaning multiple victims in a single incident appear as a single data point. 
+          Furthermore, the dataset reflects reported and recorded cases only, so actual crime 
+          volumes are likely higher.
+        </p>
+        <p>
+          A dataset was created by merging two different indicent reports, 
+          one covering 2003 to 2017, and the other 2018 to present. 
+          It was then trimmed to full calendar years to span 2003-2025, and cleaned so that 
+          records missing key values such as incident category, date, or geographic coordinates were removed. 
+          From this merged and cleaned dataset, we focus on four crime categories, 
+          kidnapping, missing persons, and two forms of human
+          trafficking: commercial sex acts and involuntary servitude, and labor
+          trafficking. It is in this last category, labor trafficking, that 
+          Taraval mysteriously stands out from the rest of the city.
         </p>
         <p>
           <strong>Figure 1</strong> displays a heatmap of the location quotients
-          for each crime type across the 10 police districts. Location Quotient
+          for each of the four crime types across the 10 police districts. Location Quotient
           is a measure of where specific crimes are disproportionately
           concentrated, compared to the average.
         </p>
